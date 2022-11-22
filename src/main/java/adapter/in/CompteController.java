@@ -2,7 +2,6 @@ package adapter.in;
 
 import application.port.in.DTOs.CreationCompteCommand;
 import application.port.in.UseCases.CreationCompteUseCase;
-import domain.Compte;
 import domain.Deck;
 
 public final class CompteController {
@@ -12,7 +11,7 @@ public final class CompteController {
         this.creationCompteUseCase = creationCompteUseCase;
     }
 
-    public Compte create(String pseudo, Deck deck) {
-        return creationCompteUseCase.creationCompte(new CreationCompteCommand(pseudo,deck));
+    public void create(String pseudo, Deck deck) {
+        creationCompteUseCase.create(new CreationCompteCommand(pseudo,deck));
     }
 }

@@ -3,13 +3,20 @@ package application.port.in.DTOs;
 import domain.Deck;
 
 public class CreationCompteCommand {
-    public final String pseudo;
-    public int nombre_jetons;
-    public Deck deck;
+    private final String pseudo;
+    private Deck deck;
 
     public CreationCompteCommand(String pseudo, Deck deck) {
         this.pseudo = pseudo;
         this.deck = deck;
-        this.nombre_jetons = 4;
     }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
 }

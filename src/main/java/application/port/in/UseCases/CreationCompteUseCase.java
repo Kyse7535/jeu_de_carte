@@ -4,5 +4,5 @@ import application.port.in.DTOs.CreationCompteCommand;
 import domain.Compte;
 
 public interface CreationCompteUseCase {
-    Compte creationCompte(CreationCompteCommand creationCompteCommand);
+    void create(CreationCompteCommand creationCompteCommand);
 }

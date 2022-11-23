@@ -41,8 +41,14 @@ public class Combat {
     public Heros getGagnant() {
         Heros gagnant = new Heros(null,null,null);
         if (this.combat_en_cours == false) {
-            if(this.attaquant.getPoint_de_vie() <= 0)  { gagnant = adversaire; }
-            if(this.adversaire.getPoint_de_vie() <= 0) { gagnant = attaquant; }
+            if(this.attaquant.getPoint_de_vie() <= 0)  {
+                adversaire.gagnerUnCombat();
+                gagnant = adversaire;
+            }
+            if(this.adversaire.getPoint_de_vie() <= 0) {
+                attaquant.gagnerUnCombat();
+                gagnant = attaquant;
+            }
             return gagnant;
         }
         else throw new RuntimeException("Le combat n'est pas fini encore!");

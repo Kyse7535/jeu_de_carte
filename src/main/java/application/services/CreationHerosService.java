@@ -6,9 +6,9 @@ import application.port.out.Repository;
 import domain.Heros;
 
 public class CreationHerosService implements CreationHerosUseCase {
-    private final Repository repository;
+    private final Repository<Heros> repository;
 
-    public CreationHerosService(Repository repository) {
+    public CreationHerosService(Repository<Heros> repository) {
         this.repository = repository;
     }
 

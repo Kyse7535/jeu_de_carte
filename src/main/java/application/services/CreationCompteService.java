@@ -6,9 +6,9 @@ import application.port.out.Repository;
 import domain.Compte;
 
 public class CreationCompteService implements CreationCompteUseCase {
-    private final Repository repository;
+    private final Repository<Compte> repository;
 
-    public CreationCompteService(Repository repository) {
+    public CreationCompteService(Repository<Compte> repository) {
         this.repository = repository;
     }
 

@@ -1,29 +1,30 @@
 package adapter.in;
 
-import application.port.in.DTOs.CreationCompteCommand;
-import application.port.in.DTOs.RechercheJoueursCommand;
-import application.port.in.UseCases.CreationCompteUseCase;
-import application.port.in.UseCases.RechercheJoueursUseCase;
-import application.port.out.Repository;
+import application.port.in.DTOs.CreationHerosCommand;
+import application.port.in.DTOs.RechercheHerosCommand;
+import application.port.in.UseCases.CreationHerosUseCase;
+import application.port.in.UseCases.RechercheHerosUseCase;
 import domain.Compte;
-import domain.Deck;
+import domain.Heros;
+import domain.Rarete;
+import domain.Specialite;
 
-import java.util.Map;
+import java.util.ArrayList;
 
-public final class CompteController {
-    private final CreationCompteUseCase creationCompteUseCase;
-    private final RechercheJoueursUseCase rechercheJoueursUseCase;
+public class HerosController {
+    private final CreationHerosUseCase creationHerosUseCase;
+    private final RechercheHerosUseCase rechercheHerosUseCase;
 
-    public CompteController(CreationCompteUseCase creationCompteUseCase, RechercheJoueursUseCase rechercheJoueursUseCase) {
-        this.creationCompteUseCase = creationCompteUseCase;
-        this.rechercheJoueursUseCase = rechercheJoueursUseCase;
+    public HerosController(CreationHerosUseCase creationHerosUseCase, RechercheHerosUseCase rechercheHerosUseCase) {
+        this.creationHerosUseCase = creationHerosUseCase;
+        this.rechercheHerosUseCase = rechercheHerosUseCase;
     }
 
-    public void create(String pseudo, Deck deck) {
-        creationCompteUseCase.create(new CreationCompteCommand(pseudo,deck));
+    public void create(Specialite specialite, Rarete rarete) {
+        creationHerosUseCase.create(new CreationHerosCommand(specialite,rarete));
     }
 
-    public Map<Compte, Deck> recherche_liste_joueur(Repository<Compte> repository) {
-        return rechercheJoueursUseCase.recherche_liste_joueur(new RechercheJoueursCommand(repository));
+    public ArrayList<Heros> recherche(Compte compte) {
+        return rechercheHerosUseCase.recherche_heros_dispo(new RechercheHerosCommand(compte));
     }
 }

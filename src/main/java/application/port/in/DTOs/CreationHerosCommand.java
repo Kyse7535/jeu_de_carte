@@ -22,8 +22,8 @@ public class CreationHerosCommand {
         return rarete;
     }
 
-    public CreationHerosCommand(String id, Specialite specialite, Rarete rarete) {
-        this.id = id;
+    public CreationHerosCommand(Specialite specialite, Rarete rarete) {
+        this.id = UUID.randomUUID().toString();
         this.specialite = specialite;
         this.rarete = rarete;
     }

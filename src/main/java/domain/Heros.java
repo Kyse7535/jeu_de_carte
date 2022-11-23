@@ -40,14 +40,11 @@ public class Heros {
 
     public void gagnerUnCombat() {
         point_exp += 1;
-    }
-
-    public void gagnerUnNiveau() {
         if (point_exp % 5 == 0) {
             this.niveau += 1;
-
         }
     }
+
 
     public float getNiveau() {
         return niveau;
@@ -96,4 +93,6 @@ public class Heros {
     public void setPuissance_supplementaire(float puissance_supplementaire) {
         this.puissance_supplementaire = puissance_supplementaire;
     }
+
+
 }

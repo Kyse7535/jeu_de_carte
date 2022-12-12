@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Heros {
@@ -12,29 +13,75 @@ public class Heros {
     private float puissance;
     private float armure;
     private float puissance_supplementaire;
+    private ArrayList<Combat> combat_history;
 
     public Heros(String id, Specialite specialite, Rarete rarete) {
         this.id = id;
         this.specialite = specialite;
         this.rarete = rarete;
         this.niveau = 1;
+        this.combat_history = new ArrayList<>();
         if(specialite.equals(Specialite.Tank)) {
             if (rarete.equals(Rarete.Commun)) {
                 point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
                 puissance = 100 + (rarete.procentage/100*puissance);
                 armure = 20 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
             }
             if (rarete.equals(Rarete.Rare)) {
                 point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
                 puissance = 100 + (rarete.procentage/100*puissance);
                 armure = 20 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
             }
             if (rarete.equals(Rarete.Legandaire)) {
                 point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
                 puissance = 100 + (rarete.procentage/100*puissance);
                 armure = 20 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
             }
         }
+        if(specialite.equals(Specialite.Assassin)) {
+            if (rarete.equals(Rarete.Commun)) {
+                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
+                puissance = 200 + (rarete.procentage/100*puissance);
+                armure = 5 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
+            }
+            if (rarete.equals(Rarete.Rare)) {
+                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
+                puissance = 200 + (rarete.procentage/100*puissance);
+                armure = 5 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
+            }
+            if (rarete.equals(Rarete.Legandaire)) {
+                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
+                puissance = 200 + (rarete.procentage/100*puissance);
+                armure = 5 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
+            }
+        }
+        if(specialite.equals(Specialite.Mage)) {
+            if (rarete.equals(Rarete.Commun)) {
+                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
+                puissance = 150 + (rarete.procentage/100*puissance);
+                armure = 10 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+            }
+            if (rarete.equals(Rarete.Rare)) {
+                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
+                puissance = 150 + (rarete.procentage/100*puissance);
+                armure = 10 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+            }
+            if (rarete.equals(Rarete.Legandaire)) {
+                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
+                puissance = 150 + (rarete.procentage/100*puissance);
+                armure = 10 + (rarete.procentage/100*armure);
+                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+            }
+        }
+
 
     }
 
@@ -42,10 +89,15 @@ public class Heros {
         point_exp += 1;
         if (point_exp % 5 == 0) {
             this.niveau += 1;
+            this.point_de_vie = (float) (this.point_de_vie + 0.1*this.point_de_vie);
+            this.puissance = (float) (this.puissance + 0.1*this.puissance);
+            this.armure = (float) (this.armure + 0.1*this.armure);
         }
     }
 
-
+    public String getId() {
+        return id;
+    }
     public float getNiveau() {
         return niveau;
     }
@@ -94,5 +146,27 @@ public class Heros {
         this.puissance_supplementaire = puissance_supplementaire;
     }
 
+    public Specialite getSpecialite() { return specialite;}
 
+    public void combat_history(Combat combat) {
+        this.combat_history.add(combat);
+    }
+    public ArrayList<Combat> get_history() {
+        return this.combat_history;
+    }
+
+    @Override
+    public String toString() {
+        return "Heros{" +
+                "id='" + id + '\'' +
+                ", specialite=" + specialite +
+                ", rarete=" + rarete +
+                ", niveau=" + niveau +
+                ", point_de_vie=" + point_de_vie +
+                ", point_exp=" + point_exp +
+                ", puissance=" + puissance +
+                ", armure=" + armure +
+                ", puissance_supplementaire=" + puissance_supplementaire +
+                '}';
+    }
 }

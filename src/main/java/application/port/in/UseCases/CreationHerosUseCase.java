@@ -1,7 +1,8 @@
 package application.port.in.UseCases;
 
 import application.port.in.DTOs.CreationHerosCommand;
+import domain.Heros;
 
 public interface CreationHerosUseCase {
-    void create(CreationHerosCommand creationHerosCommand);
+    Heros create(CreationHerosCommand creationHerosCommand);
 }

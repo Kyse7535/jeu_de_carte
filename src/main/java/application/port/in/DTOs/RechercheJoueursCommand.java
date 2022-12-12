@@ -1,12 +1,15 @@
 package application.port.in.DTOs;
 
-import application.port.out.Repository;
-import domain.Compte;
+import application.port.out.CompteRepository;
 
 public class RechercheJoueursCommand {
-    private final Repository<Compte> repository;
+    private final CompteRepository repository;
 
-    public RechercheJoueursCommand(Repository<Compte> repository) {
+    public RechercheJoueursCommand(CompteRepository repository) {
         this.repository = repository;
+    }
+
+    public CompteRepository getRepository() {
+        return repository;
     }
 }

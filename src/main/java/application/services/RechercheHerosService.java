@@ -2,24 +2,23 @@ package application.services;
 
 import application.port.in.DTOs.RechercheHerosCommand;
 import application.port.in.UseCases.RechercheHerosUseCase;
-import application.port.out.Repository;
+import application.port.out.HerosRepository;
 import domain.Heros;
 
 import java.util.ArrayList;
 
 
 public class RechercheHerosService implements RechercheHerosUseCase {
-    private final Repository<Heros> repository;
+    private final HerosRepository repository;
 
-    public RechercheHerosService(Repository<Heros> repository) {
+    public RechercheHerosService(HerosRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public ArrayList<Heros> recherche_heros_dispo(RechercheHerosCommand rechercheHerosCommand) {
 
-        ArrayList<Heros> listHeros = repository.findAll();
-        return listHeros;
+        rechercheHerosCommand.getDeck();
+        return repository.findAllHeros();
     }
-
 }

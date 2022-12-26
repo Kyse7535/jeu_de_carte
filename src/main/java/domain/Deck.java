@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Deck {
     private ArrayList<Heros> listCartes;

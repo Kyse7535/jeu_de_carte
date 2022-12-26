@@ -7,9 +7,8 @@ public class CreationCompteCommand {
     private Deck deck;
     private int nbr_jetons;
 
-    public CreationCompteCommand(String pseudo, Deck deck) {
+    public CreationCompteCommand(String pseudo) {
         this.pseudo = pseudo;
-        this.deck = deck;
         nbr_jetons = 4;
     }
 

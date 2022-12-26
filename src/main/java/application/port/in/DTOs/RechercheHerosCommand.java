@@ -9,4 +9,7 @@ public class RechercheHerosCommand {
     public RechercheHerosCommand(Compte joueur) {
         this.deck = joueur.getDeck();
     }
+    public Deck getDeck() {
+        return deck;
+    }
 }

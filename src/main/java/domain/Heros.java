@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Heros {
     private final String id;

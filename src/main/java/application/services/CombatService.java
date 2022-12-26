@@ -16,8 +16,7 @@ public class CombatService implements CombatUseCase {
     public Combat attack(CombatCommand combatCommand) {
         Combat combat = combatCommand.getCombat();
         combat.attaque();
-        combat.combat_history();
-        combat.getGagnant();
+        //combat.combat_history();
         repository.update(combatCommand.getCombat().getAttaquant());
         repository.update(combatCommand.getCombat().getAdversaire());
         return combat;

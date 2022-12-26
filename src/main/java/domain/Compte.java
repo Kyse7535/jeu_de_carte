@@ -1,8 +1,13 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Compte {
-    private final String pseudo;
+    @JsonProperty
+    private String pseudo;
+    @JsonProperty
     private int nombre_jetons;
+    @JsonProperty
     private Deck deck;
 
 
@@ -11,6 +16,8 @@ public class Compte {
         this.nombre_jetons = 4;
         this.deck = new Deck();
     }
+
+    Compte() {}
 
     public Deck getDeck() {
         return deck;

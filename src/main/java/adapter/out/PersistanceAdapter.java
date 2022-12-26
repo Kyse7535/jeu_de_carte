@@ -20,8 +20,11 @@ public class PersistanceAdapter implements CompteRepository, HerosRepository {
     }
 
     @Override
-    public Compte load(String pseudo) {
-        return null;
+    public Compte load_compte(String pseudo) {
+        return registryCompte.computeIfAbsent(pseudo,
+                key -> {
+            throw new RuntimeException("compte not found");
+                });
     }
 
     @Override
@@ -42,8 +45,11 @@ public class PersistanceAdapter implements CompteRepository, HerosRepository {
     }
 
     @Override
-    public Heros load(UUID id) {
-        return null;
+    public Heros load_heros(String id) {
+        return registryHeros.computeIfAbsent(id,
+                key -> {
+                    throw new RuntimeException("heros not found");
+                });
     }
 
     @Override

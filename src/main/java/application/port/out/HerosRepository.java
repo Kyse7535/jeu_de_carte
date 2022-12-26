@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface HerosRepository {
     void save(Heros heros);
-    Heros load(UUID id);
+    Heros load_heros(String id);
     void update(Heros heros);
     ArrayList<Heros> findAllHeros();
 }

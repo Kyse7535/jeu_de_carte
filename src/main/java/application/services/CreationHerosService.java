@@ -14,7 +14,7 @@ public class CreationHerosService implements CreationHerosUseCase {
 
     @Override
     public Heros create(CreationHerosCommand creationHerosCommand) {
-        Heros heros = new Heros(creationHerosCommand.getId(),creationHerosCommand.getSpecialite(),creationHerosCommand.getRarete());
+        Heros heros = new Heros(creationHerosCommand.getId(),creationHerosCommand.getCaracteristiques());
         repository.save(heros);
         return heros;
     }

@@ -16,9 +16,7 @@ public class RechercheHerosService implements RechercheHerosUseCase {
     }
 
     @Override
-    public ArrayList<Heros> recherche_heros_dispo(RechercheHerosCommand rechercheHerosCommand) {
-
-        rechercheHerosCommand.getDeck();
-        return repository.findAllHeros();
+    public Heros recherche_heros_dispo(RechercheHerosCommand rechercheHerosCommand) {
+        return repository.load_heros(rechercheHerosCommand.id);
     }
 }

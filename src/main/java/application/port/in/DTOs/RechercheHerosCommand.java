@@ -1,15 +1,14 @@
 package application.port.in.DTOs;
 
-import domain.Compte;
-import domain.Deck;
+import application.port.out.HerosRepository;
 
 public class RechercheHerosCommand {
-    private Deck deck;
+    public final String id;
 
-    public RechercheHerosCommand(Compte joueur) {
-        this.deck = joueur.getDeck();
+
+    public RechercheHerosCommand(String id) {
+        this.id = id;
     }
-    public Deck getDeck() {
-        return deck;
-    }
+
+
 }

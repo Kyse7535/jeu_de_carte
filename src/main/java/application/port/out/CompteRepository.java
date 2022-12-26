@@ -8,7 +8,7 @@ public interface CompteRepository {
 
 
     void save(Compte compte);
-    Compte load(String pseudo);
+    Compte load_compte(String pseudo);
     void update(Compte compte);
     ArrayList<Compte> findAllPlayers();
 }

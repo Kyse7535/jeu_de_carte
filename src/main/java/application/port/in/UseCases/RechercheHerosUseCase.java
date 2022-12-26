@@ -6,5 +6,5 @@ import domain.Heros;
 import java.util.ArrayList;
 
 public interface RechercheHerosUseCase {
-    ArrayList<Heros> recherche_heros_dispo(RechercheHerosCommand rechercheHerosCommand);
+    Heros recherche_heros_dispo(RechercheHerosCommand rechercheHerosCommand);
 }

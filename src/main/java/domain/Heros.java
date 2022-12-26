@@ -1,88 +1,100 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 
 public class Heros {
-    private final String id;
-    private final Specialite specialite;
-    private final Rarete rarete;
+    @JsonProperty
+    private String id;
+    @JsonProperty
+    private Caracteristiques caracteristiques;
+    @JsonProperty
     private float niveau;
+    @JsonProperty
     private float point_de_vie;
+    @JsonProperty
     private float point_exp;
+    @JsonProperty
     private float puissance;
+    @JsonProperty
     private float armure;
+    @JsonProperty
     private float puissance_supplementaire;
+    @JsonIgnore
     private ArrayList<Combat> combat_history;
 
-    public Heros(String id, Specialite specialite, Rarete rarete) {
+    public Heros(String id, Caracteristiques caracteristiques) {
         this.id = id;
-        this.specialite = specialite;
-        this.rarete = rarete;
+       this.caracteristiques = caracteristiques;
         this.niveau = 1;
         this.combat_history = new ArrayList<>();
-        if(specialite.equals(Specialite.Tank)) {
-            if (rarete.equals(Rarete.Commun)) {
-                point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
-                puissance = 100 + (rarete.procentage/100*puissance);
-                armure = 20 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
+        if(caracteristiques.getSpecialite().equals(Specialite.Tank)) {
+            if (caracteristiques.getRarete().equals(Rarete.Commun)) {
+                point_de_vie = 1000 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 100 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 20 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 20 + (caracteristiques.getRarete().procentage/100*armure);
             }
-            if (rarete.equals(Rarete.Rare)) {
-                point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
-                puissance = 100 + (rarete.procentage/100*puissance);
-                armure = 20 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
+            if (caracteristiques.getRarete().equals(Rarete.Rare)) {
+                point_de_vie = 1000 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 100 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 20 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 20 + (caracteristiques.getRarete().procentage/100*armure);
             }
-            if (rarete.equals(Rarete.Legandaire)) {
-                point_de_vie = 1000 + (rarete.procentage/100*point_de_vie);
-                puissance = 100 + (rarete.procentage/100*puissance);
-                armure = 20 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 20 + (rarete.procentage/100*armure);
-            }
-        }
-        if(specialite.equals(Specialite.Assassin)) {
-            if (rarete.equals(Rarete.Commun)) {
-                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
-                puissance = 200 + (rarete.procentage/100*puissance);
-                armure = 5 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
-            }
-            if (rarete.equals(Rarete.Rare)) {
-                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
-                puissance = 200 + (rarete.procentage/100*puissance);
-                armure = 5 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
-            }
-            if (rarete.equals(Rarete.Legandaire)) {
-                point_de_vie = 800 + (rarete.procentage/100*point_de_vie);
-                puissance = 200 + (rarete.procentage/100*puissance);
-                armure = 5 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 30 + (rarete.procentage/100*armure);
+            if (caracteristiques.getRarete().equals(Rarete.Legandaire)) {
+                point_de_vie = 1000 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 100 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 20 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 20 + (caracteristiques.getRarete().procentage/100*armure);
             }
         }
-        if(specialite.equals(Specialite.Mage)) {
-            if (rarete.equals(Rarete.Commun)) {
-                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
-                puissance = 150 + (rarete.procentage/100*puissance);
-                armure = 10 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+        if(caracteristiques.getSpecialite().equals(Specialite.Assassin)) {
+            if (caracteristiques.getRarete().equals(Rarete.Commun)) {
+                point_de_vie = 800 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 200 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 5 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 30 + (caracteristiques.getRarete().procentage/100*armure);
             }
-            if (rarete.equals(Rarete.Rare)) {
-                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
-                puissance = 150 + (rarete.procentage/100*puissance);
-                armure = 10 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+            if (caracteristiques.getRarete().equals(Rarete.Rare)) {
+                point_de_vie = 800 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 200 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 5 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 30 + (caracteristiques.getRarete().procentage/100*armure);
             }
-            if (rarete.equals(Rarete.Legandaire)) {
-                point_de_vie = 700 + (rarete.procentage/100*point_de_vie);
-                puissance = 150 + (rarete.procentage/100*puissance);
-                armure = 10 + (rarete.procentage/100*armure);
-                puissance_supplementaire = 25 + (rarete.procentage/100*armure);
+            if (caracteristiques.getRarete().equals(Rarete.Legandaire)) {
+                point_de_vie = 800 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 200 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 5 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 30 + (caracteristiques.getRarete().procentage/100*armure);
+            }
+        }
+        if(caracteristiques.getSpecialite().equals(Specialite.Mage)) {
+            if (caracteristiques.getRarete().equals(Rarete.Commun)) {
+                point_de_vie = 700 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 150 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 10 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 25 + (caracteristiques.getRarete().procentage/100*armure);
+            }
+            if (caracteristiques.getRarete().equals(Rarete.Rare)) {
+                point_de_vie = 700 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 150 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 10 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 25 + (caracteristiques.getRarete().procentage/100*armure);
+            }
+            if (caracteristiques.getRarete().equals(Rarete.Legandaire)) {
+                point_de_vie = 700 + (caracteristiques.getRarete().procentage/100*point_de_vie);
+                puissance = 150 + (caracteristiques.getRarete().procentage/100*puissance);
+                armure = 10 + (caracteristiques.getRarete().procentage/100*armure);
+                puissance_supplementaire = 25 + (caracteristiques.getRarete().procentage/100*armure);
             }
         }
 
 
     }
+
+    public Heros() {}
 
     public void gagnerUnCombat() {
         point_exp += 1;
@@ -145,7 +157,7 @@ public class Heros {
         this.puissance_supplementaire = puissance_supplementaire;
     }
 
-    public Specialite getSpecialite() { return specialite;}
+    public Caracteristiques getCaracteristiques() { return caracteristiques;}
 
     public void combat_history(Combat combat) {
         this.combat_history.add(combat);
@@ -158,8 +170,7 @@ public class Heros {
     public String toString() {
         return "Heros{" +
                 "id='" + id + '\'' +
-                ", specialite=" + specialite +
-                ", rarete=" + rarete +
+                ", caracteristiques=" + caracteristiques +
                 ", niveau=" + niveau +
                 ", point_de_vie=" + point_de_vie +
                 ", point_exp=" + point_exp +

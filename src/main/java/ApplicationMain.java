@@ -17,8 +17,10 @@ public class ApplicationMain {
         CreationHerosUseCase creationHerosUseCase = new CreationHerosService(persistanceAdapter);
         RechercheHerosUseCase rechercheHerosUseCase = new RechercheHerosService(persistanceAdapter);
         OuverturePackUseCase ouverturePackUseCase = new OuverturePackService(new CreationHerosService(persistanceAdapter), persistanceAdapter);
-
-        CompteController compteController = new CompteController(creationCompteUseCase,rechercheJoueursUseCase, combatUseCase, creationHerosUseCase, rechercheHerosUseCase, ouverturePackUseCase);
+        RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase = new RechercheHistoryHeroService(persistanceAdapter);
+        RechercheUnJoueurUseCase rechercheUnJoueurUseCase = new RechercheUnJoueurService(persistanceAdapter);
+        CompteController compteController = new CompteController(creationCompteUseCase,rechercheJoueursUseCase, combatUseCase, creationHerosUseCase, rechercheHerosUseCase, ouverturePackUseCase, rechercheHistoryHeroUseCase,
+                rechercheUnJoueurUseCase);
 
 
         Compte compte1 = compteController.create_compte("test");
@@ -26,17 +28,17 @@ public class ApplicationMain {
         ArrayList<Compte> list = compteController.recherche_liste_joueur(persistanceAdapter);
         System.out.println(list);
 
-        Heros heros1= compteController.create_heros(Specialite.Tank, Rarete.Rare);
-        Heros heros2= compteController.create_heros(Specialite.Tank, Rarete.Rare);
+        Heros heros1= compteController.create_heros(new Caracteristiques(Specialite.Tank, Rarete.Rare));
+        Heros heros2= compteController.create_heros(new Caracteristiques(Specialite.Tank, Rarete.Rare));
 
         System.out.println(persistanceAdapter.findAllHeros());
 
         compte1.getDeck().ajouteCarte(heros1);
         compte1.getDeck().ajouteCarte(heros2);
 
-        compteController.combat(heros1,heros2);
-        compteController.ouverture_pack(compte1,Pack.argent);
-        compteController.ouverture_pack(compte2,Pack.argent);
+        compteController.combat(heros1.getId(),heros2.getId());
+        compteController.ouverture_pack(compte1.getPseudo(),"argent");
+        compteController.ouverture_pack(compte2.getPseudo(),"argent");
 
         System.out.println(persistanceAdapter.findAllHeros());
         System.out.println(heros1.get_history());

@@ -1,9 +1,16 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Combat {
-    private final Heros attaquant;
-    private final Heros adversaire;
+
+    @JsonProperty
+    private  Heros attaquant;
+    @JsonProperty
+    private  Heros adversaire;
+    @JsonProperty
     private boolean combat_en_cours = true;
+    @JsonProperty
     private Heros gagnant;
 
 
@@ -11,16 +18,19 @@ public class Combat {
         this.attaquant = attaquant;
         this.adversaire = adversaire;
     }
+
+    Combat() {}
+
     public void un_attaque() {
         float damage = 0;
         if(this.adversaire.getNiveau() < this.attaquant.getNiveau()) { throw new RuntimeException("Le niveau de l'adversaire est trop petit");}
-        if(this.attaquant.getSpecialite() == Specialite.Tank && this.adversaire.getSpecialite() == Specialite.Mage) {
+        if(this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Tank && this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Mage) {
             damage = this.attaquant.getPuissance() + this.attaquant.getPuissance_supplementaire() - this.adversaire.getArmure() ;
         }
-        else if(this.attaquant.getSpecialite() == Specialite.Assassin && this.adversaire.getSpecialite() == Specialite.Tank) {
+        else if(this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Assassin && this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Tank) {
             damage = this.attaquant.getPuissance() + this.attaquant.getPuissance_supplementaire() - this.adversaire.getArmure() ;
         }
-        else if(this.attaquant.getSpecialite() == Specialite.Mage && this.adversaire.getSpecialite() == Specialite.Assassin) {
+        else if(this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Mage && this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Assassin) {
             damage = this.attaquant.getPuissance() + this.attaquant.getPuissance_supplementaire() - this.adversaire.getArmure() ;
         }
         else {
@@ -37,13 +47,13 @@ public class Combat {
 
     public void un_contre_attaque() {
         float damage = 0;
-        if(this.adversaire.getSpecialite() == Specialite.Tank && this.attaquant.getSpecialite() == Specialite.Mage) {
+        if(this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Tank && this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Mage) {
             damage = this.adversaire.getPuissance() + this.adversaire.getPuissance_supplementaire() - this.attaquant.getArmure() ;
         }
-        else if(this.adversaire.getSpecialite() == Specialite.Assassin && this.attaquant.getSpecialite() == Specialite.Tank) {
+        else if(this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Assassin && this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Tank) {
             damage = this.adversaire.getPuissance() + this.adversaire.getPuissance_supplementaire() - this.attaquant.getArmure() ;
         }
-        else if(this.adversaire.getSpecialite() == Specialite.Mage && this.attaquant.getSpecialite() == Specialite.Assassin) {
+        else if(this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Mage && this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Assassin) {
             damage = this.adversaire.getPuissance() + this.adversaire.getPuissance_supplementaire() - this.attaquant.getArmure() ;
         }
         else {
@@ -98,13 +108,6 @@ public class Combat {
         adversaire.combat_history(this);
     }
 
-    @Override
-    public String toString() {
-        return "Combat{" +
-                "attaquant=" + attaquant.getId() +
-                ", adversaire=" + adversaire.getId() +
-                ", combat_en_cours=" + combat_en_cours +
-                ", gagnant=" + gagnant +
-                '}';
-    }
+
+
 }

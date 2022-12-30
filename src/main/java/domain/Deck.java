@@ -17,6 +17,10 @@ public class Deck {
         listCartes.add(heros);
     }
 
+    public ArrayList<Heros> getListCartes() {
+        return listCartes;
+    }
+
     @Override
     public String toString() {
         return "Deck{" +

@@ -27,6 +27,14 @@ public class Compte {
         return pseudo;
     }
 
+    public int getNombre_jetons() {
+        return nombre_jetons;
+    }
+
+    public void diminueNombre_jetons(int nombre_jetons) {
+        this.nombre_jetons -= nombre_jetons;
+    }
+
     @Override
     public String toString() {
         return "Compte{" +

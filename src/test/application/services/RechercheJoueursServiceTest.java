@@ -20,26 +20,28 @@ import static org.mockito.Mockito.when;
 class RechercheJoueursServiceTest {
 
     @InjectMocks
-    RechercheJoueursService rechercheJoueursService;
+    private RechercheJoueursService rechercheJoueursService;
+
+    @InjectMocks
+    private CreationCompteService creationCompteService;
 
     @Mock
-    PersistanceAdapter persistanceAdapter;
+    private PersistanceAdapter persistanceAdapter;
+
 
     @Test
     void recherche_liste_joueur() {
-        //BEFORE
-        Compte compte = new Compte("test");
-        ArrayList<Compte> comptes = new ArrayList<>();
-        comptes.add(compte);
+        Compte compte = creationCompteService.create(new CreationCompteCommand("test"));
+        ArrayList<Compte> list = new ArrayList<>();
+        list.add(compte);
 
-        RechercheJoueursCommand rechercheUnJoueurCommand =  new RechercheJoueursCommand(persistanceAdapter);
+        // WHEN
+        when(persistanceAdapter.findAllPlayers()).thenReturn(list);
+        ArrayList<Compte> comptes_result = rechercheJoueursService.recherche_liste_joueur(new RechercheJoueursCommand(persistanceAdapter));
 
-        //WHEN
-        when(persistanceAdapter.load_compte(compte.getPseudo())).thenReturn(compte);
-        ArrayList<Compte> comptes_2 = rechercheJoueursService.recherche_liste_joueur(rechercheUnJoueurCommand);
-
-        //THEN
-        assertThat(comptes_2).contains(compte);
-        verify(persistanceAdapter).load_compte(compte.getPseudo());
+        // ASSERT
+        Assertions.assertTrue(comptes_result.contains(compte));
+        verify(persistanceAdapter).findAllPlayers();
     }
+}
 }

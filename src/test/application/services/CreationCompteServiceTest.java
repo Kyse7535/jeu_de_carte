@@ -22,10 +22,10 @@ class CreationCompteServiceTest {
 
 
     @Test
-    public void create() {
-        CreationCompteCommand creationCompteCommand = new CreationCompteCommand("test");
-        Compte compte = creationCompteService.create(creationCompteCommand);
-
-        Assertions.assertEquals(compte.getPseudo(),"test");
+    void create() {
+        Compte compte = service.create(new CreationCompteCommand("test"));
+        Assertions.assertEquals(4, compte.getNombre_jetons());
+        Assertions.assertTrue(compte.getDeck().getListCartes().isEmpty());
+        Assertions.assertEquals("test",compte.getPseudo());
     }
 }

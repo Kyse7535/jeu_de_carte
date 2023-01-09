@@ -42,6 +42,7 @@ public class Heros {
     private float puissance_supplementaire;
     @JsonIgnore
     private ArrayList<Combat> combat_history;
+    private boolean en_vie;
 
     public static Heros newCommunTank(String id) {
         return new Heros(id,new Caracteristiques(Specialite.Tank,Rarete.Commun),POINTS_VIE_TANK,POINTS_PUISSANCE_TANK,POINTS_ARMURE_TANK,POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
@@ -108,14 +109,20 @@ public class Heros {
         this.point_de_vie = point_de_vie;
         this.armure = armure;
         this.puissance_supplementaire = puissance_supplementaire;
+        this.niveau = 1;
+        this.combat_history = new ArrayList<>();
+        this.en_vie = true;
     }
 
 
     public Heros(String id, Caracteristiques caracteristiques) {
         this.id = id;
         this.caracteristiques = caracteristiques;
-    }
+        this.niveau = 1;
+        this.combat_history = new ArrayList<>();
+        this.en_vie = true;
 
+    }
 
     public Heros() {}
 
@@ -187,6 +194,10 @@ public class Heros {
     }
     public ArrayList<Combat> get_history() {
         return this.combat_history;
+    }
+
+    public void setEn_vie(boolean en_vie) {
+        this.en_vie = en_vie;
     }
 
     @Override

@@ -138,6 +138,6 @@ class HerosTest {
         assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_ARMURE_MAGE);
         assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Mage);
-        assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Rare);
+        assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Legendaire);
     }
 }

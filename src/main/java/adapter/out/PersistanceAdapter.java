@@ -21,10 +21,7 @@ public class PersistanceAdapter implements CompteRepository, HerosRepository {
 
     @Override
     public Compte load_compte(String pseudo) {
-        return registryCompte.computeIfAbsent(pseudo,
-                key -> {
-            throw new RuntimeException("compte not found");
-                });
+        return registryCompte.get(pseudo);
     }
 
     @Override

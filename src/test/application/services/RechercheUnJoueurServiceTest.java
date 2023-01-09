@@ -27,15 +27,22 @@ class RechercheUnJoueurServiceTest {
     private PersistanceAdapter persistanceAdapter;
 
     @Test
-    void recherche_un_joueur() {
+    void recherche_un_joueur_vrai() {
         Compte compte = new Compte("test");
 
         // WHEN
+
         when(persistanceAdapter.load_compte(compte.getPseudo())).thenReturn(compte);
         Compte compte_result = rechercheUnJoueurService.recherche_un_joueur(new RechercheUnJoueurCommand(compte.getPseudo()));
 
         // ASSERT
         Assertions.assertEquals("test",compte_result.getPseudo());
         Mockito.verify(persistanceAdapter).load_compte(compte.getPseudo());
+    }
+
+    @Test
+    void recherche_un_joueur_faux() {
+        when(persistanceAdapter.load_compte("test")).thenReturn(null);
+        Assertions.assertThrows(RuntimeException.class, () -> rechercheUnJoueurService.recherche_un_joueur(new RechercheUnJoueurCommand("test")));
     }
 }

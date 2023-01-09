@@ -14,6 +14,10 @@ public class RechercheUnJoueurService implements RechercheUnJoueurUseCase {
 
     @Override
     public Compte recherche_un_joueur(RechercheUnJoueurCommand rechercheUnJoueurCommand) {
-        return repository.load_compte(rechercheUnJoueurCommand.getPseudo());
+        Compte compte = repository.load_compte(rechercheUnJoueurCommand.getPseudo());
+        if (compte == null) {
+            throw new RuntimeException("le compte n'existe pas");
+        }
+        return compte;
     }
 }

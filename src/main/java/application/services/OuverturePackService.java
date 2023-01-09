@@ -23,9 +23,11 @@ public class OuverturePackService implements OuverturePackUseCase {
 
     @Override
     public ArrayList<Heros> ouvre_pack(OuverturePackCommand ouverturePackCommand) {
+        if(ouverturePackCommand.getCompte().getNombre_jetons() < ouverturePackCommand.getPack().prix) {
+            throw new RuntimeException("Le compte n'a pas suffisamment de jetons pour ouvrir un tel pack");
+        }
         ArrayList<Heros> liste_cartes = new ArrayList<>();
-
-        ouverturePackCommand.getCompte().diminueNombre_jetons(ouverturePackCommand.getPack().nbr_cartes);
+        ouverturePackCommand.getCompte().diminueNombre_jetons(ouverturePackCommand.getPack().prix);
 
         for(int i=0;i<ouverturePackCommand.getPack().nbr_cartes;i++) {
 

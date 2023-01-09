@@ -23,7 +23,6 @@ public class Combat {
 
     public void un_attaque() {
         float damage = 0;
-        if(this.adversaire.getNiveau() < this.attaquant.getNiveau()) { throw new RuntimeException("Le niveau de l'adversaire est trop petit");}
         if(this.attaquant.getCaracteristiques().getSpecialite() == Specialite.Tank && this.adversaire.getCaracteristiques().getSpecialite() == Specialite.Mage) {
             damage = this.attaquant.getPuissance() + this.attaquant.getPuissance_supplementaire() - this.adversaire.getArmure() ;
         }
@@ -70,6 +69,7 @@ public class Combat {
     }
 
     public void attaque() {
+        if(this.adversaire.getNiveau() < this.attaquant.getNiveau()) { throw new RuntimeException("Le niveau de l'adversaire est trop petit");}
         while(this.attaquant.getPoint_de_vie() > 0 && this.adversaire.getPoint_de_vie() > 0) {
             un_attaque();
             if(this.adversaire.getPoint_de_vie() <= 0) {this.adversaire.setEn_vie(false); break;}

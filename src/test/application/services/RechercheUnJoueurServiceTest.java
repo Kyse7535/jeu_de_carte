@@ -28,7 +28,7 @@ class RechercheUnJoueurServiceTest {
 
     @Test
     void recherche_un_joueur() {
-        Compte compte = creationCompteService.create(new CreationCompteCommand("test"));
+        Compte compte = new Compte("test");
 
         // WHEN
         when(persistanceAdapter.load_compte(compte.getPseudo())).thenReturn(compte);

@@ -72,8 +72,9 @@ public class Combat {
     public void attaque() {
         while(this.attaquant.getPoint_de_vie() > 0 && this.adversaire.getPoint_de_vie() > 0) {
             un_attaque();
-            if(this.adversaire.getPoint_de_vie() <= 0) { break;}
+            if(this.adversaire.getPoint_de_vie() <= 0) {this.adversaire.setEn_vie(false); break;}
             un_contre_attaque();
+            if(this.attaquant.getPoint_de_vie() <= 0) {this.attaquant.setEn_vie(false); break;}
         }
         this.combat_en_cours = false;
     }
@@ -107,7 +108,4 @@ public class Combat {
         attaquant.combat_history(this);
         adversaire.combat_history(this);
     }
-
-
-
 }

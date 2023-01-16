@@ -26,8 +26,21 @@ class CreationHerosServiceTest {
     public void create() {
         CreationHerosCommand creationHerosCommand = new CreationHerosCommand(new Caracteristiques(Specialite.Tank, Rarete.Commun));
         Heros heros = creationHerosService.create(creationHerosCommand);
+        Heros heros2 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Tank,Rarete.Legandaire)));
+        Heros heros3 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Assassin,Rarete.Commun)));
+        Heros heros4 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Assassin,Rarete.Legandaire)));
+        Heros heros5 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Assassin,Rarete.Rare)));
+        Heros heros6 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Mage,Rarete.Commun)));
+        Heros heros7 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Mage,Rarete.Rare)));
+        Heros heros8 = creationHerosService.create(new CreationHerosCommand(new Caracteristiques(Specialite.Mage,Rarete.Legandaire)));
 
-
+        Assertions.assertEquals(heros8.getCaracteristiques().getRarete(),Rarete.Legandaire);
+        Assertions.assertEquals(heros7.getCaracteristiques().getRarete(),Rarete.Rare);
+        Assertions.assertEquals(heros6.getCaracteristiques().getRarete(),Rarete.Commun);
+        Assertions.assertEquals(heros4.getCaracteristiques().getSpecialite(),Specialite.Assassin);
+        Assertions.assertEquals(heros3.getCaracteristiques().getRarete(),Rarete.Commun);
+        Assertions.assertEquals(heros5.getCaracteristiques().getRarete(),Rarete.Rare);
+        Assertions.assertEquals(heros2.getCaracteristiques().getRarete(),Rarete.Legandaire);
         Assertions.assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Commun);
         Assertions.assertNotEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Mage);
         Assertions.assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Tank);
@@ -37,6 +50,7 @@ class CreationHerosServiceTest {
         Assertions.assertEquals(heros.getPuissance(),100);
         Assertions.assertEquals(heros.getPoint_de_vie(),1000);
         Assertions.assertEquals(heros.getPoint_exp(),0);
+
 
     }
 }

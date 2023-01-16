@@ -8,24 +8,32 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CreationCompteServiceTest {
 
-
     @InjectMocks
-    private CreationCompteService creationCompteService;
+    private CreationCompteService service;
 
+    @Mock
+    private PersistanceAdapter persistanceAdapter;
 
     @Test
-    void create() {
+    void should_create() {
         Compte compte = service.create(new CreationCompteCommand("test"));
         Assertions.assertEquals(4, compte.getNombre_jetons());
         Assertions.assertTrue(compte.getDeck().getListCartes().isEmpty());
         Assertions.assertEquals("test",compte.getPseudo());
     }
+    @Test
+    void should_not_create() {
+        Compte compte = service.create(new CreationCompteCommand("test"));
+        Mockito.when(persistanceAdapter.load_compte("test")).thenReturn(compte);
+        org.assertj.core.api.Assertions.assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> service.create(new CreationCompteCommand("test")));
+    }
+
 }

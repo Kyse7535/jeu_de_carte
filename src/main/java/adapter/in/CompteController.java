@@ -1,10 +1,11 @@
 package adapter.in;
 
+import adapter.mapper.CaracteristiquesDtoMapper;
+import adapter.mapper.CombatDtoMapper;
+import adapter.mapper.CompteDtoMapper;
+import adapter.mapper.HerosDtoMapper;
 import application.port.in.DTOs.*;
 import application.port.in.UseCases.*;
-import application.port.out.CompteRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,55 +36,72 @@ public final class CompteController {
     }
 
     @PostMapping("/create_account")
-    public Compte create_compte(@RequestBody @Valid String pseudo) {
-        return creationCompteUseCase.create(new CreationCompteCommand(pseudo));
+    public CompteDTO create_compte(@RequestBody @Valid CreationCompteDTO dto) {
+        Compte compte = creationCompteUseCase.create(new CreationCompteCommand(dto.pseudo));
+        return CompteDtoMapper.toDto(compte);
         // curl -X POST localhost:8080/create_account -H 'Content-type:application/json' -d 'gesco'
     }
 
     @GetMapping("/players")
-    public ArrayList<Compte> recherche_liste_joueur(CompteRepository repository) {
-        return rechercheJoueursUseCase.recherche_liste_joueur(new RechercheJoueursCommand(repository));
+    public ArrayList<CompteDTO> recherche_liste_joueur() {
+        ArrayList<Compte> listeComptes = rechercheJoueursUseCase.rechercheListeJoueur();
+        ArrayList<CompteDTO> listeComptesDTO = new ArrayList<>();
+        for(Compte i : listeComptes) {
+            CompteDTO compteDTO = CompteDtoMapper.toDto(i);
+            listeComptesDTO.add(compteDTO);
+        }
+        return listeComptesDTO;
         // curl -v localhost:8080/players
     }
 
     @GetMapping("/heros/{id}")
-    public Heros recherche_un_heros(@PathVariable String id) {
-        return rechercheHerosUseCase.recherche_heros_dispo(new RechercheHerosCommand(id));
+    public HerosDTO recherche_un_heros(@PathVariable String id) {
+        Heros heros = rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(id));
+        return HerosDtoMapper.toDto(heros);
     }
 
     @GetMapping("/{attaquant}/combat/{adversaire}")
-    public Heros combat(@PathVariable String attaquant, @PathVariable String adversaire){
+    public HerosDTO combat(@PathVariable String attaquant, @PathVariable String adversaire){
         Combat combat = new Combat(
-                rechercheHerosUseCase.recherche_heros_dispo(new RechercheHerosCommand(attaquant)),
-                rechercheHerosUseCase.recherche_heros_dispo(new RechercheHerosCommand(adversaire))
+                rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(attaquant)),
+                rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(adversaire))
         );
 
         combatUseCase.attack(new CombatCommand(combat));
-        return combat.getGagnant();
+        return HerosDtoMapper.toDto(combat.getGagnant());
         // curl -v localhost:8080/gesco/combat/gesco2
     }
 
     @PostMapping("/heros/create")
-    public Heros create_heros(@RequestBody @Valid Caracteristiques caracteristiques) {
-        return creationHerosUseCase.create(new CreationHerosCommand(caracteristiques));
+    public HerosDTO create_heros(@RequestBody @Valid HerosCreationDTO herosCreationDTO) {
+        Caracteristiques caracteristiques = CaracteristiquesDtoMapper.toDomain(herosCreationDTO.caracteristiquesDto);
+        Heros heros =  creationHerosUseCase.create(new CreationHerosCommand(caracteristiques));
+        return HerosDtoMapper.toDto(heros);
         //curl -X POST localhost:8080/heros/create -H 'Content-type:application/json' -d '{"specialite": "Tank", "rarete": "Commun"}'
     }
 
     @GetMapping("/{pseudo}/open_pack/{pack}")
-    public ArrayList<Heros> ouverture_pack(@PathVariable String pseudo,@PathVariable String pack) {
-        Compte compte = rechercheUnJoueurUseCase.recherche_un_joueur(new RechercheUnJoueurCommand(pseudo));
-        ArrayList<Heros> liste_cartes =  ouverturePackUseCase.ouvre_pack(new OuverturePackCommand(Pack.valueOf(pack), compte));
+    public ArrayList<HerosDTO> ouverture_pack(@PathVariable String pseudo,@PathVariable String pack) {
+        Compte compte = rechercheUnJoueurUseCase.rechercheUnJoueur(new RechercheUnJoueurCommand(pseudo));
+        ArrayList<Heros> liste_cartes =  ouverturePackUseCase.ouvrePack(new OuverturePackCommand(Pack.valueOf(pack), compte));
+        ArrayList<HerosDTO> listeCartesDTO = new ArrayList<>();
         for(Heros i : liste_cartes) {
             compte.getDeck().ajouteCarte(i);
+            listeCartesDTO.add(HerosDtoMapper.toDto(i));
         }
-        return liste_cartes;
+        return listeCartesDTO;
         // curl -v localhost:8080/gesco/open_pack/argent
 
     }
 
 
-    public ArrayList<Combat> combat_history(Heros heros) {
-        return rechercheHistoryHeroUseCase.combat_history(new RechercheHistoryHeroCommand(heros));
+    public ArrayList<CombatDTO> combat_history(String id) {
+        ArrayList<Combat> listeCombat = rechercheHistoryHeroUseCase.combatHistory(new RechercheHistoryHeroCommand(id));
+        ArrayList<CombatDTO> listeCombatDTO = new ArrayList<>();
+        for(Combat i : listeCombat) {
+            listeCombatDTO.add(CombatDtoMapper.toDto(i));
+        }
+        return listeCombatDTO;
     }
 
 

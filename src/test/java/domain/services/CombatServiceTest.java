@@ -1,7 +1,8 @@
-package application.services;
+package domain.services;
 
 import adapter.out.PersistanceAdapter;
 import application.port.in.DTOs.CombatCommand;
+import application.services.CombatService;
 import domain.Combat;
 import domain.Heros;
 import org.junit.jupiter.api.Assertions;

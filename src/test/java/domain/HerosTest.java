@@ -12,9 +12,9 @@ class HerosTest {
     @Test
     void gagnerUnCombat() {
         attaquant.gagnerUnCombat();
-        Assertions.assertEquals(attaquant.getPoint_exp(),1);
+        Assertions.assertEquals(attaquant.getPointExp(),1);
         attaquant.gagnerUnCombat();
-        Assertions.assertEquals(attaquant.getPoint_exp(),2);
+        Assertions.assertEquals(attaquant.getPointExp(),2);
         attaquant.gagnerUnCombat();
         attaquant.gagnerUnCombat();
         attaquant.gagnerUnCombat();
@@ -23,10 +23,10 @@ class HerosTest {
 
     @Test
     void combat_history() {
-        attaquant.combat_history(new Combat(attaquant,attaquant));
-        Assertions.assertTrue(!attaquant.get_history().isEmpty());
+        attaquant.combatHistory(new Combat(attaquant,attaquant));
+        Assertions.assertTrue(!attaquant.getHistory().isEmpty());
     }
-    
+
     private static final float POINTS_VIE_TANK = 1000;
     private static final float POINTS_PUISSANCE_TANK = 100;
     private static final float POINTS_ARMURE_TANK = 20;
@@ -45,10 +45,10 @@ class HerosTest {
     @Test
     void newCommunTank() {
         Heros heros = Heros.newCommunTank("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_TANK);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_TANK);
         assertEquals(heros.getPuissance(),POINTS_PUISSANCE_TANK);
         assertEquals(heros.getArmure(),POINTS_ARMURE_TANK);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Tank);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Commun);
     }
@@ -56,10 +56,10 @@ class HerosTest {
     @Test
     void newRareTank() {
         Heros heros = Heros.newRareTank("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_TANK+Rarete.Rare.procentage/100 * POINTS_VIE_TANK);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_TANK+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_TANK);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_TANK+Rarete.Rare.procentage/100 * POINTS_ARMURE_TANK);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_TANK+Rarete.Rare.getProcentage()/100 * POINTS_VIE_TANK);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_TANK+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_TANK);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_TANK+Rarete.Rare.getProcentage()/100 * POINTS_ARMURE_TANK);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Tank);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Rare);
     }
@@ -67,10 +67,10 @@ class HerosTest {
     @Test
     void newLegendaryTank() {
         Heros heros = Heros.newLegendaryTank("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_TANK+Rarete.Legandaire.procentage/100 * POINTS_VIE_TANK);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_TANK+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_TANK);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_TANK+Rarete.Legandaire.procentage/100 * POINTS_ARMURE_TANK);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_TANK+Rarete.Legandaire.getProcentage()/100 * POINTS_VIE_TANK);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_TANK+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_TANK);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_TANK+Rarete.Legandaire.getProcentage()/100 * POINTS_ARMURE_TANK);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_TANK);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Tank);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Legandaire);
     }
@@ -78,10 +78,10 @@ class HerosTest {
     @Test
     void newCommunAssassin() {
         Heros heros = Heros.newCommunAssassin("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_ASSASSIN);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_ASSASSIN);
         assertEquals(heros.getPuissance(),POINTS_PUISSANCE_ASSASSIN);
         assertEquals(heros.getArmure(),POINTS_ARMURE_ASSASSIN);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Assassin);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Commun);
     }
@@ -89,10 +89,10 @@ class HerosTest {
     @Test
     void newRareAssassin() {
         Heros heros = Heros.newRareAssassin("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_ASSASSIN+Rarete.Rare.procentage/100 * POINTS_VIE_ASSASSIN);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_ASSASSIN+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_ASSASSIN);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_ASSASSIN+Rarete.Rare.procentage/100 * POINTS_ARMURE_ASSASSIN);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_ASSASSIN+Rarete.Rare.getProcentage()/100 * POINTS_VIE_ASSASSIN);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_ASSASSIN+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_ASSASSIN);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_ASSASSIN+Rarete.Rare.getProcentage()/100 * POINTS_ARMURE_ASSASSIN);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Assassin);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Rare);
     }
@@ -100,10 +100,10 @@ class HerosTest {
     @Test
     void newLegendaryAssassin() {
         Heros heros = Heros.newLegendaryAssassin("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_ASSASSIN+Rarete.Legandaire.procentage/100 * POINTS_VIE_ASSASSIN);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_ASSASSIN+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_ASSASSIN);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_ASSASSIN+Rarete.Legandaire.procentage/100 * POINTS_ARMURE_ASSASSIN);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_ASSASSIN+Rarete.Legandaire.getProcentage()/100 * POINTS_VIE_ASSASSIN);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_ASSASSIN+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_ASSASSIN);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_ASSASSIN+Rarete.Legandaire.getProcentage()/100 * POINTS_ARMURE_ASSASSIN);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_ASSASSIN);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Assassin);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Legandaire);
     }
@@ -111,10 +111,10 @@ class HerosTest {
     @Test
     void newCommunMage() {
         Heros heros = Heros.newCommunMage("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_MAGE);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_MAGE);
         assertEquals(heros.getPuissance(),POINTS_PUISSANCE_MAGE);
         assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Mage);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Commun);
     }
@@ -122,10 +122,10 @@ class HerosTest {
     @Test
     void newRareMage() {
         Heros heros = Heros.newRareMage("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_MAGE+Rarete.Rare.procentage/100 * POINTS_VIE_MAGE);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_MAGE+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_MAGE);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE+Rarete.Rare.procentage/100 * POINTS_ARMURE_MAGE);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE+Rarete.Rare.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_MAGE+Rarete.Rare.getProcentage()/100 * POINTS_VIE_MAGE);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_MAGE+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_MAGE);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE+Rarete.Rare.getProcentage()/100 * POINTS_ARMURE_MAGE);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE+Rarete.Rare.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Mage);
         assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Rare);
     }
@@ -133,11 +133,11 @@ class HerosTest {
     @Test
     void newLegendaryMage() {
         Heros heros = Heros.newLegendaryMage("test");
-        assertEquals(heros.getPoint_de_vie(),POINTS_VIE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_VIE_MAGE);
-        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_MAGE);
-        assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_ARMURE_MAGE);
-        assertEquals(heros.getPuissance_supplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE+Rarete.Legandaire.procentage/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
+        assertEquals(heros.getPointDeVie(),POINTS_VIE_MAGE+Rarete.Legandaire.getProcentage()/100 * POINTS_VIE_MAGE);
+        assertEquals(heros.getPuissance(),POINTS_PUISSANCE_MAGE+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_MAGE);
+        assertEquals(heros.getArmure(),POINTS_ARMURE_MAGE+Rarete.Legandaire.getProcentage()/100 * POINTS_ARMURE_MAGE);
+        assertEquals(heros.getPuissanceSupplementaire(),POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE+Rarete.Legandaire.getProcentage()/100 * POINTS_PUISSANCE_SUPPLEMENTAIRE_MAGE);
         assertEquals(heros.getCaracteristiques().getSpecialite(),Specialite.Mage);
-        assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Legendaire);
+        assertEquals(heros.getCaracteristiques().getRarete(),Rarete.Legandaire);
     }
 }

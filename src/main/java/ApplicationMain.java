@@ -1,4 +1,5 @@
-import adapter.in.CompteController;
+import adapter.in.*;
+import adapter.out.MysqlAdapter;
 import adapter.out.PersistanceAdapter;
 import application.port.in.UseCases.*;
 import application.services.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class ApplicationMain {
     public static void main(String[] args) {
 
-        PersistanceAdapter persistanceAdapter = new PersistanceAdapter();
+        PersistanceAdapter persistanceAdapter = new MysqlAdapter();
 
         CreationCompteUseCase creationCompteUseCase = new CreationCompteService(persistanceAdapter);
         RechercheJoueursUseCase rechercheJoueursUseCase = new RechercheJoueursService(persistanceAdapter);
@@ -23,25 +24,27 @@ public class ApplicationMain {
                 rechercheUnJoueurUseCase);
 
 
-        Compte compte1 = compteController.create_compte("test");
-        Compte compte2 = compteController.create_compte("test2");
-        ArrayList<Compte> list = compteController.recherche_liste_joueur(persistanceAdapter);
+        CompteDTO compte1 = compteController.create_compte(new CreationCompteDTO("test"));
+        CompteDTO compte2 = compteController.create_compte(new CreationCompteDTO("test2"));
+        ArrayList<CompteDTO> list = compteController.recherche_liste_joueur();
         System.out.println(list);
 
-        Heros heros1= compteController.create_heros(new Caracteristiques(Specialite.Tank, Rarete.Rare));
-        Heros heros2= compteController.create_heros(new Caracteristiques(Specialite.Tank, Rarete.Rare));
+        HerosDTO heros1= compteController.create_heros(
+                new HerosCreationDTO(new CaracteristiquesDto(SpecialiteDto.Tank, RareteDto.Rare)));
+        HerosDTO heros2= compteController.create_heros(
+                new HerosCreationDTO(new CaracteristiquesDto(SpecialiteDto.Tank, RareteDto.Rare)));
 
         System.out.println(persistanceAdapter.findAllHeros());
 
-        compte1.getDeck().ajouteCarte(heros1);
-        compte1.getDeck().ajouteCarte(heros2);
+        compte1.deck.listCartes.add(heros1);
+        compte1.deck.listCartes.add(heros2);
 
-        compteController.combat(heros1.getId(),heros2.getId());
-        compteController.ouverture_pack(compte1.getPseudo(),"argent");
-        compteController.ouverture_pack(compte2.getPseudo(),"argent");
+        compteController.combat(heros1.id,heros2.id);
+        compteController.ouverture_pack(compte1.pseudo,"argent");
+        compteController.ouverture_pack(compte2.pseudo,"argent");
 
         System.out.println(persistanceAdapter.findAllHeros());
-        System.out.println(heros1.get_history());
+        System.out.println(heros1.combatHistory);
         System.out.println(list);
     }
 

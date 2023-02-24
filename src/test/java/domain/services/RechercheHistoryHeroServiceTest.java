@@ -1,7 +1,8 @@
-package application.services;
+package domain.services;
 
 import adapter.out.PersistanceAdapter;
 import application.port.in.DTOs.RechercheHistoryHeroCommand;
+import application.services.RechercheHistoryHeroService;
 import domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -203,4 +203,12 @@ public class Heros {
                 ", puissance_supplementaire=" + puissanceSupplementaire +
                 '}';
     }
+
+    public ArrayList<Combat> getCombatHistory() {
+        return combatHistory;
+    }
+
+    public void setCombatHistory(ArrayList<Combat> combatHistory) {
+        this.combatHistory = combatHistory;
+    }
 }

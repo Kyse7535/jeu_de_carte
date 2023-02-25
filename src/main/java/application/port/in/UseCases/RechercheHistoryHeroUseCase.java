@@ -3,8 +3,8 @@ package application.port.in.UseCases;
 import application.port.in.DTOs.RechercheHistoryHeroCommand;
 import domain.Combat;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface RechercheHistoryHeroUseCase {
-    ArrayList<Combat> combatHistory(RechercheHistoryHeroCommand rechercheHistoryHeroCommand);
+    List<Combat> combatHistory(RechercheHistoryHeroCommand rechercheHistoryHeroCommand);
 }

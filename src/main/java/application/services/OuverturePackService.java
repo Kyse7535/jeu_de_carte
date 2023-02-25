@@ -30,7 +30,6 @@ public class OuverturePackService implements OuverturePackUseCase {
         ArrayList<Heros> liste_cartes = new ArrayList<>();
         Compte compte = ouverturePackCommand.getCompte();
         compte.diminueNombre_jetons(ouverturePackCommand.getPack().getPrix());
-        compteRepository.update(compte);
 
         for(int i = 0; i<ouverturePackCommand.getPack().getNbrCartes(); i++) {
 
@@ -41,21 +40,25 @@ public class OuverturePackService implements OuverturePackUseCase {
 
                 Heros heros = creationHerosUseCase.create(new CreationHerosCommand(new Caracteristiques(Specialite.random(), Rarete.Legandaire)));
                 liste_cartes.add(heros);
+                compte.getDeck().ajouteCarte(heros);
                 repository.save(heros);
 
             } else if (probability_rarete < (ouverturePackCommand.getPack().getProbabilites()[0] + ouverturePackCommand.getPack().getProbabilites()[1])) {
 
                 Heros heros = creationHerosUseCase.create(new CreationHerosCommand(new Caracteristiques(Specialite.random(), Rarete.Rare)));
                 liste_cartes.add(heros);
+                compte.getDeck().ajouteCarte(heros);
                 repository.save(heros);
 
             } else {
 
                 Heros heros = creationHerosUseCase.create(new CreationHerosCommand(new Caracteristiques(Specialite.random(), Rarete.Commun)));
                 liste_cartes.add(heros);
+                compte.getDeck().ajouteCarte(heros);
                 repository.save(heros);
             }
         }
+        compteRepository.update(compte);
 
         return liste_cartes;
     }

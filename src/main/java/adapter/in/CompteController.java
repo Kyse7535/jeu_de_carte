@@ -105,7 +105,6 @@ public final class CompteController {
         ArrayList<Heros> liste_cartes =  ouverturePackUseCase.ouvrePack(new OuverturePackCommand(Pack.valueOf(pack), compte));
         ArrayList<HerosDTO> listeCartesDTO = new ArrayList<>();
         for(Heros i : liste_cartes) {
-            compte.getDeck().ajouteCarte(i);
             listeCartesDTO.add(HerosDtoMapper.toDto(i));
         }
         return listeCartesDTO;
@@ -114,7 +113,7 @@ public final class CompteController {
 
     @GetMapping("/{heros_id}/history")
     public ArrayList<CombatDTO> combat_history(@PathVariable String heros_id) {
-        ArrayList<Combat> listeCombat = rechercheHistoryHeroUseCase.combatHistory(new RechercheHistoryHeroCommand(heros_id));
+        List<Combat> listeCombat = rechercheHistoryHeroUseCase.combatHistory(new RechercheHistoryHeroCommand(heros_id));
         ArrayList<CombatDTO> listeCombatDTO = new ArrayList<>();
         for(Combat i : listeCombat) {
             listeCombatDTO.add(CombatDtoMapper.toDto(i));

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Heros {
 
@@ -28,7 +29,7 @@ public class Heros {
     private float puissance;
     private float armure;
     private float puissanceSupplementaire;
-    private ArrayList<Combat> combatHistory;
+    private List<Combat> combatHistory;
     private boolean enVie;
 
     public Heros() {
@@ -174,7 +175,7 @@ public class Heros {
         this.combatHistory.add(combat);
     }
 
-    public ArrayList<Combat> getHistory() {
+    public List<Combat> getHistory() {
         return this.combatHistory;
     }
 
@@ -204,7 +205,7 @@ public class Heros {
                 '}';
     }
 
-    public ArrayList<Combat> getCombatHistory() {
+    public List<Combat> getCombatHistory() {
         return combatHistory;
     }
 

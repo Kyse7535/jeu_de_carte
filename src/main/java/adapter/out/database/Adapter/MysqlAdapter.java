@@ -1,6 +1,5 @@
 package adapter.out.database.Adapter;
 
-import adapter.in.HerosDTO;
 import adapter.out.database.Entity.CompteEntity;
 import adapter.out.database.Entity.HerosEntity;
 import adapter.out.database.Mapper.CompteEntityMapper;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MysqlAdapter implements ComptePersistenceSpi, HerosPersistenceSpi {
@@ -32,8 +32,11 @@ public class MysqlAdapter implements ComptePersistenceSpi, HerosPersistenceSpi {
     @Override
     @Transactional
     public void save(Compte compte) {
-        CompteEntity entity = CompteEntityMapper.toEntity(compte);
-        compteRepository.save(entity);
+        Optional<CompteEntity> optional = compteRepository.findById(compte.getPseudo());
+        if(optional.isEmpty()) {
+            CompteEntity entity = CompteEntityMapper.toEntity(compte);
+            compteRepository.save(entity);
+        }
     }
 
     @Override

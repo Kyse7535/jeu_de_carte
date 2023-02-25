@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HerosDTO {
     @JsonProperty
@@ -23,10 +24,12 @@ public class HerosDTO {
     @JsonProperty
     public float puissanceSupplementaire;
     @JsonIgnore
-    public ArrayList<CombatDTO> combatHistory;
+    public List<CombatDTO> combatHistory;
     public boolean en_vie;
 
-    public HerosDTO(String id, CaracteristiquesDto caracteristiques, float niveau, float pointDeVie, float pointExp, float puissance, float armure, float puissanceSupplementaire, ArrayList<CombatDTO> combatHistory, boolean en_vie) {
+    public HerosDTO(String id, CaracteristiquesDto caracteristiques, float niveau, float pointDeVie, float pointExp,
+                    float puissance, float armure, float puissanceSupplementaire,
+                    List<CombatDTO> combatHistory, boolean en_vie) {
         this.id = id;
         this.caracteristiques = caracteristiques;
         this.niveau = niveau;

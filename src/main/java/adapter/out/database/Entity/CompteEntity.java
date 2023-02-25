@@ -2,11 +2,9 @@ package adapter.out.database.Entity;
 
 import adapter.in.DeckDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static javax.persistence.CascadeType.ALL;
 

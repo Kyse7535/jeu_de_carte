@@ -5,7 +5,7 @@ import application.port.in.UseCases.RechercheHistoryHeroUseCase;
 import application.port.out.HerosPersistenceSpi;
 import domain.Combat;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RechercheHistoryHeroService implements RechercheHistoryHeroUseCase {
 
@@ -16,7 +16,7 @@ public class RechercheHistoryHeroService implements RechercheHistoryHeroUseCase 
     }
 
     @Override
-    public ArrayList<Combat> combatHistory(RechercheHistoryHeroCommand rechercheHistoryHeroCommand) {
+    public List<Combat> combatHistory(RechercheHistoryHeroCommand rechercheHistoryHeroCommand) {
         return repository.load_heros(rechercheHistoryHeroCommand.getHerosId()).getHistory();
     }
 }

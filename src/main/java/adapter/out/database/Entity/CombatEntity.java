@@ -4,6 +4,7 @@ import domain.Heros;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name="combats")
@@ -53,5 +54,17 @@ public class CombatEntity {
 
     public HerosEntity getGagnant() {
         return gagnant;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CombatEntity that)) return false;
+        return id == that.id && combatEnCours == that.combatEnCours && attaquant.equals(that.attaquant) && adversaire.equals(that.adversaire) && gagnant.equals(that.gagnant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, attaquant, adversaire, combatEnCours, gagnant);
     }
 }

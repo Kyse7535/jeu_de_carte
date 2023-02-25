@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CreationCompteCommand;
 import application.services.CreationCompteService;
 import application.services.RechercheJoueursService;
@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,7 +28,7 @@ class RechercheJoueursServiceTest {
     private CreationCompteService creationCompteService;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
 
     @Test
@@ -38,7 +39,7 @@ class RechercheJoueursServiceTest {
 
         // WHEN
         when(persistanceAdapter.findAllPlayers()).thenReturn(list);
-        ArrayList<Compte> comptes_result = rechercheJoueursService.rechercheListeJoueur();
+        List<Compte> comptes_result = rechercheJoueursService.rechercheListeJoueur();
 
         // ASSERT
         Assertions.assertTrue(comptes_result.contains(compte));

@@ -1,8 +1,6 @@
 package application.port.in.DTOs;
 
 import domain.Caracteristiques;
-import domain.Rarete;
-import domain.Specialite;
 
 import java.util.UUID;
 

@@ -1,6 +1,7 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CreationHerosCommand;
 import application.port.in.DTOs.RechercheHerosCommand;
 import application.services.CreationHerosService;
@@ -28,7 +29,7 @@ class RechercheHerosServiceTest {
     private CreationHerosService creationHerosService;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Test
     void recherche_heros_dispo() {

@@ -1,9 +1,5 @@
 package application.port.in.DTOs;
 
-import domain.Heros;
-
-import java.util.UUID;
-
 public class RechercheHistoryHeroCommand {
     private final String id;
 

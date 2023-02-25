@@ -2,13 +2,13 @@ package application.services;
 
 import application.port.in.DTOs.CreationCompteCommand;
 import application.port.in.UseCases.CreationCompteUseCase;
-import application.port.out.CompteRepository;
+import application.port.out.ComptePersistenceSpi;
 import domain.Compte;
 
 public class CreationCompteService implements CreationCompteUseCase {
-    private final CompteRepository repository;
+    private final ComptePersistenceSpi repository;
 
-    public CreationCompteService(CompteRepository repository) {
+    public CreationCompteService(ComptePersistenceSpi repository) {
         this.repository = repository;
     }
 

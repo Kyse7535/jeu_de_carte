@@ -4,7 +4,7 @@ import application.port.in.DTOs.CreationHerosCommand;
 import application.port.in.DTOs.OuverturePackCommand;
 import application.port.in.UseCases.CreationHerosUseCase;
 import application.port.in.UseCases.OuverturePackUseCase;
-import application.port.out.HerosRepository;
+import application.port.out.HerosPersistenceSpi;
 import domain.*;
 
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class OuverturePackService implements OuverturePackUseCase {
     private final CreationHerosUseCase creationHerosUseCase;
-    private final HerosRepository repository;
+    private final HerosPersistenceSpi repository;
 
-    public OuverturePackService(CreationHerosUseCase creationHerosUseCase, HerosRepository repository) {
+    public OuverturePackService(CreationHerosUseCase creationHerosUseCase, HerosPersistenceSpi repository) {
         this.creationHerosUseCase = creationHerosUseCase;
         this.repository = repository;
     }

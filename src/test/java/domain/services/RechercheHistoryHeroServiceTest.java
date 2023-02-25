@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.RechercheHistoryHeroCommand;
 import application.services.RechercheHistoryHeroService;
 import domain.*;
@@ -22,7 +22,7 @@ class RechercheHistoryHeroServiceTest {
     RechercheHistoryHeroService rechercheHistoryHeroService;
 
     @Mock
-    PersistanceAdapter persistanceAdapter;
+    MysqlAdapter persistanceAdapter;
 
     @Test
     void combat_history() {

@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.OuverturePackCommand;
 import application.services.OuverturePackService;
 import domain.Compte;
@@ -23,7 +23,7 @@ class OuverturePackServiceTest {
     private OuverturePackService ouverturePackService;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Mock
     private Random random;

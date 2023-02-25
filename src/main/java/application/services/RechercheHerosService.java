@@ -2,21 +2,19 @@ package application.services;
 
 import application.port.in.DTOs.RechercheHerosCommand;
 import application.port.in.UseCases.RechercheHerosUseCase;
-import application.port.out.HerosRepository;
+import application.port.out.HerosPersistenceSpi;
 import domain.Heros;
-
-import java.util.ArrayList;
 
 
 public class RechercheHerosService implements RechercheHerosUseCase {
-    private final HerosRepository repository;
+    private final HerosPersistenceSpi repository;
 
-    public RechercheHerosService(HerosRepository repository) {
+    public RechercheHerosService(HerosPersistenceSpi repository) {
         this.repository = repository;
     }
 
     @Override
     public Heros rechercheHerosDispo(RechercheHerosCommand rechercheHerosCommand) {
-        return repository.load_heros(rechercheHerosCommand.id);
+        return repository.load_heros(String.valueOf(rechercheHerosCommand.id));
     }
 }

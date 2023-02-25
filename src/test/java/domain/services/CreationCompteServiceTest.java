@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CreationCompteCommand;
 import application.services.CreationCompteService;
 import domain.Compte;
@@ -19,7 +19,7 @@ class CreationCompteServiceTest {
     private CreationCompteService service;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Test
     void should_create() {

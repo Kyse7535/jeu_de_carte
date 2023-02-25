@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.RechercheUnJoueurCommand;
 import application.services.CreationCompteService;
 import application.services.RechercheUnJoueurService;
@@ -25,7 +25,7 @@ class RechercheUnJoueurServiceTest {
     private CreationCompteService creationCompteService;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Test
     void recherche_un_joueur_vrai() {

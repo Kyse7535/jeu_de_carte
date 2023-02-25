@@ -1,6 +1,6 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CreationHerosCommand;
 import application.services.CreationHerosService;
 import domain.Caracteristiques;
@@ -21,7 +21,7 @@ class CreationHerosServiceTest {
     CreationHerosService creationHerosService;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Test
     public void create() {

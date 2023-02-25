@@ -1,6 +1,7 @@
 package domain.services;
 
-import adapter.out.PersistanceAdapter;
+
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CombatCommand;
 import application.services.CombatService;
 import domain.Combat;
@@ -19,7 +20,7 @@ class CombatServiceTest {
     CombatService service;
 
     @Mock
-    private PersistanceAdapter persistanceAdapter;
+    private MysqlAdapter persistanceAdapter;
 
     @Test
     public void attack() {

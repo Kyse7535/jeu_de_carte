@@ -1,16 +1,17 @@
 package adapter.out;
 
-import application.port.out.CompteRepository;
-import application.port.out.HerosRepository;
+
+import adapter.out.database.Repository.CompteRepository;
+import application.port.out.ComptePersistenceSpi;
+import application.port.out.HerosPersistenceSpi;
 import domain.Compte;
 import domain.Heros;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-public class PersistanceAdapter implements CompteRepository, HerosRepository {
+public class PersistanceAdapter implements ComptePersistenceSpi, HerosPersistenceSpi {
     private final Map<String, Compte> registryCompte = new HashMap<>();
     private final Map<String, Heros> registryHeros = new HashMap<>();
 
@@ -43,7 +44,7 @@ public class PersistanceAdapter implements CompteRepository, HerosRepository {
 
     @Override
     public Heros load_heros(String id) {
-        return registryHeros.computeIfAbsent(id,
+        return registryHeros.computeIfAbsent(String.valueOf(id),
                 key -> {
                     throw new RuntimeException("heros not found");
                 });
@@ -60,3 +61,4 @@ public class PersistanceAdapter implements CompteRepository, HerosRepository {
         return list;
     }
 }
+

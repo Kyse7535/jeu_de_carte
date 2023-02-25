@@ -1,39 +1,23 @@
 package domain;
 
+import adapter.in.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class ConvertJavaObjectToJson {
-/*
+
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        // Competence offre = newCompetence();
+        HerosCreationDTO dto = new HerosCreationDTO(new CaracteristiquesDto(SpecialiteDto.Tank, RareteDto.Commun));
 
         try {
-            mapper.writeValue(new File("offre.json"), offre);
-            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(offre);
+            mapper.writeValue(new File("offre.json"), dto);
+            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
             System.out.println(jsonString);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    private static Offre newOffre() {
-        ArrayList<Competence> competences= new ArrayList<>();
-        competences.add(new Competence("C++"));
-
-        ArrayList<Modalite> modalites = new ArrayList<>();
-        modalites.add(Modalite.Presenciel);
-
-        Offre offre = new Offre("123","100",competences,modalites,"lundi","10");
-
-
-        return offre;
-    }
-
-    private static Competence newCompetence() {
-       return new Competence("C++");
-    }*/
 }

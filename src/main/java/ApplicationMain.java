@@ -1,16 +1,14 @@
 import adapter.in.*;
-import adapter.out.MysqlAdapter;
-import adapter.out.PersistanceAdapter;
+import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.UseCases.*;
 import application.services.*;
-import domain.*;
 
 import java.util.ArrayList;
 
 public class ApplicationMain {
     public static void main(String[] args) {
-
-        PersistanceAdapter persistanceAdapter = new MysqlAdapter();
+/*
+        MysqlAdapter persistanceAdapter = new MysqlAdapter(compteRepository);
 
         CreationCompteUseCase creationCompteUseCase = new CreationCompteService(persistanceAdapter);
         RechercheJoueursUseCase rechercheJoueursUseCase = new RechercheJoueursService(persistanceAdapter);
@@ -46,6 +44,10 @@ public class ApplicationMain {
         System.out.println(persistanceAdapter.findAllHeros());
         System.out.println(heros1.combatHistory);
         System.out.println(list);
+
+ */
     }
+
+
 
 }

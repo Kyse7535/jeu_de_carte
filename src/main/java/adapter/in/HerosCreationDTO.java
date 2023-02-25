@@ -7,6 +7,9 @@ public class HerosCreationDTO {
         this.caracteristiquesDto = caracteristiquesDto;
     }
 
+    public HerosCreationDTO() {
+    }
+
     @Override
     public String toString() {
         return "HerosCreationDTO{" +

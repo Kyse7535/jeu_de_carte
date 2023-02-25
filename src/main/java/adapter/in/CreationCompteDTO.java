@@ -1,7 +1,13 @@
 package adapter.in;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public final class CreationCompteDTO {
-        public final String pseudo;
+    @JsonProperty
+    public String pseudo;
+
+    public CreationCompteDTO() {
+    }
 
     public CreationCompteDTO(String pseudo) {
         this.pseudo = pseudo;

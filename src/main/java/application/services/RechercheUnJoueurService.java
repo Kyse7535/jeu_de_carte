@@ -2,13 +2,13 @@ package application.services;
 
 import application.port.in.DTOs.RechercheUnJoueurCommand;
 import application.port.in.UseCases.RechercheUnJoueurUseCase;
-import application.port.out.CompteRepository;
+import application.port.out.ComptePersistenceSpi;
 import domain.Compte;
 
 public class RechercheUnJoueurService implements RechercheUnJoueurUseCase {
-    private final CompteRepository repository;
+    private final ComptePersistenceSpi repository;
 
-    public RechercheUnJoueurService(CompteRepository repository) {
+    public RechercheUnJoueurService(ComptePersistenceSpi repository) {
         this.repository = repository;
     }
 

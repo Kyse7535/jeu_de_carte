@@ -2,13 +2,13 @@ package application.services;
 
 import application.port.in.DTOs.CombatCommand;
 import application.port.in.UseCases.CombatUseCase;
-import application.port.out.HerosRepository;
+import application.port.out.HerosPersistenceSpi;
 import domain.Combat;
 
 public class CombatService implements CombatUseCase {
-    private final HerosRepository repository;
+    private final HerosPersistenceSpi repository;
 
-    public CombatService(HerosRepository repository) {
+    public CombatService(HerosPersistenceSpi repository) {
         this.repository = repository;
     }
 

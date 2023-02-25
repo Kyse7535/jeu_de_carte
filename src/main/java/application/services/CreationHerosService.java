@@ -2,15 +2,15 @@ package application.services;
 
 import application.port.in.DTOs.CreationHerosCommand;
 import application.port.in.UseCases.CreationHerosUseCase;
-import application.port.out.HerosRepository;
+import application.port.out.HerosPersistenceSpi;
 import domain.Heros;
 import domain.Rarete;
 import domain.Specialite;
 
 public class CreationHerosService implements CreationHerosUseCase {
-    private final HerosRepository repository;
+    private final HerosPersistenceSpi repository;
 
-    public CreationHerosService(HerosRepository repository) {
+    public CreationHerosService(HerosPersistenceSpi repository) {
         this.repository = repository;
     }
 

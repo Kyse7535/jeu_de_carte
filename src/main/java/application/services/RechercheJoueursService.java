@@ -1,20 +1,21 @@
 package application.services;
 
 import application.port.in.UseCases.RechercheJoueursUseCase;
-import application.port.out.CompteRepository;
+import application.port.out.ComptePersistenceSpi;
 import domain.Compte;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RechercheJoueursService implements  RechercheJoueursUseCase{
-    private final CompteRepository repository;
+    private final ComptePersistenceSpi repository;
 
-    public RechercheJoueursService(CompteRepository repository) {
+    public RechercheJoueursService(ComptePersistenceSpi repository) {
         this.repository = repository;
     }
 
     @Override
-    public ArrayList<Compte> rechercheListeJoueur() {
+    public List<Compte> rechercheListeJoueur() {
         return repository.findAllPlayers();
     }
 }

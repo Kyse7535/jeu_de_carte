@@ -1,57 +1,60 @@
 package adapter;
 
-import adapter.out.PersistanceAdapter;
+
 import application.port.in.UseCases.*;
+import application.port.out.ComptePersistenceSpi;
+import application.port.out.HerosPersistenceSpi;
 import application.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 public class ApplicationConfiguration {
 
+
     @Bean
-    public PersistanceAdapter persistanceAdapter() {
-        return new PersistanceAdapter();
+    public CreationCompteUseCase creationCompteUseCase(ComptePersistenceSpi spi) {
+        return new CreationCompteService(spi);
     }
 
     @Bean
-    public CreationCompteUseCase creationCompteUseCase() {
-        return new CreationCompteService(persistanceAdapter());
+    public RechercheJoueursUseCase rechercheJoueursUseCase(ComptePersistenceSpi spi) {
+        return new RechercheJoueursService(spi);
     }
 
     @Bean
-    public RechercheHerosUseCase rechercheHerosUseCase() {
-        return new RechercheHerosService(persistanceAdapter());
+    public CreationHerosUseCase creationHerosUseCase(HerosPersistenceSpi spi) {
+        return new CreationHerosService(spi);
+    }
+    @Bean
+    public RechercheHerosUseCase rechercheHerosUseCase(HerosPersistenceSpi spi) {
+        return new RechercheHerosService(spi);
     }
 
-    @Bean
-    public RechercheJoueursUseCase rechercheJoueursUseCase() {
-        return new RechercheJoueursService(persistanceAdapter());
-    }
-
-    @Bean
-    public CombatUseCase combatUseCase() {
-        return new CombatService(persistanceAdapter());
-    }
-
-    @Bean
-    public CreationHerosUseCase creationHerosUseCase() {
-        return new CreationHerosService(persistanceAdapter());
-    }
+    /*
 
 
     @Bean
-    public OuverturePackUseCase ouverturePackUseCase() {
+    public CombatUseCase combatUseCase(ComptePersistenceSpi spi) {
+        return new CombatService(spi);
+    }
+
+    @Bean
+    public OuverturePackUseCase ouverturePackUseCase(ComptePersistenceSpi spi) {
         return new OuverturePackService(creationHerosUseCase(),persistanceAdapter());
     }
 
     @Bean
-    public RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase() {
+    public RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase(ComptePersistenceSpi spi) {
         return new RechercheHistoryHeroService(persistanceAdapter());
     }
 
     @Bean
-    public RechercheUnJoueurUseCase rechercheUnJoueurUseCase() {
-        return new RechercheUnJoueurService(persistanceAdapter());
+    public RechercheUnJoueurUseCase rechercheUnJoueurUseCase(ComptePersistenceSpi spi) {
+        return new RechercheUnJoueurService(spi);
     }
+
+     */
+
 }

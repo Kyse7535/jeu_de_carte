@@ -3,9 +3,9 @@ package domain.services;
 
 import adapter.out.database.Adapter.MysqlAdapter;
 import application.port.in.DTOs.CreationHerosCommand;
-import application.port.in.DTOs.RechercheHerosCommand;
+import application.port.in.DTOs.RechercheUnHerosCommand;
 import application.services.CreationHerosService;
-import application.services.RechercheHerosService;
+import application.services.RechercheUnHerosService;
 import domain.Caracteristiques;
 import domain.Heros;
 import domain.Rarete;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 class RechercheHerosServiceTest {
 
     @InjectMocks
-    private RechercheHerosService rechercheHerosService;
+    private RechercheUnHerosService rechercheHerosService;
 
     @InjectMocks
     private CreationHerosService creationHerosService;
@@ -39,7 +39,7 @@ class RechercheHerosServiceTest {
 
         // WHEN
         when(persistanceAdapter.load_heros(heros.getId())).thenReturn(heros);
-        Heros heros_result = rechercheHerosService.rechercheHerosDispo(new RechercheHerosCommand(heros.getId()));
+        Heros heros_result = rechercheHerosService.rechercheHerosDispo(new RechercheUnHerosCommand(heros.getId()));
 
         // ASSERT
         verify(persistanceAdapter).load_heros(heros.getId());

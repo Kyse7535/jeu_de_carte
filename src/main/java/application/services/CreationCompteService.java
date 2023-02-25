@@ -16,10 +16,7 @@ public class CreationCompteService implements CreationCompteUseCase {
     @Override
     public Compte create(CreationCompteCommand creationCompteCommand) {
         Compte compte = new Compte(creationCompteCommand.getPseudo());
-        if(repository.load_compte(compte.getPseudo())==null) {
-            repository.save(compte);
-            return compte;
-        }
-        else throw new RuntimeException("Un compte avec le meme pseudo existe deja");
+        repository.save(compte);
+        return compte;
     }
 }

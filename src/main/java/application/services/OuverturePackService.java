@@ -4,6 +4,7 @@ import application.port.in.DTOs.CreationHerosCommand;
 import application.port.in.DTOs.OuverturePackCommand;
 import application.port.in.UseCases.CreationHerosUseCase;
 import application.port.in.UseCases.OuverturePackUseCase;
+import application.port.out.ComptePersistenceSpi;
 import application.port.out.HerosPersistenceSpi;
 import domain.*;
 
@@ -13,10 +14,12 @@ import java.util.Random;
 public class OuverturePackService implements OuverturePackUseCase {
     private final CreationHerosUseCase creationHerosUseCase;
     private final HerosPersistenceSpi repository;
+    private final ComptePersistenceSpi compteRepository;
 
-    public OuverturePackService(CreationHerosUseCase creationHerosUseCase, HerosPersistenceSpi repository) {
+    public OuverturePackService(CreationHerosUseCase creationHerosUseCase, HerosPersistenceSpi repository, ComptePersistenceSpi compteRepository) {
         this.creationHerosUseCase = creationHerosUseCase;
         this.repository = repository;
+        this.compteRepository = compteRepository;
     }
 
     @Override
@@ -25,7 +28,9 @@ public class OuverturePackService implements OuverturePackUseCase {
             throw new RuntimeException("Le compte n'a pas suffisamment de jetons pour ouvrir un tel pack");
         }
         ArrayList<Heros> liste_cartes = new ArrayList<>();
-        ouverturePackCommand.getCompte().diminueNombre_jetons(ouverturePackCommand.getPack().getPrix());
+        Compte compte = ouverturePackCommand.getCompte();
+        compte.diminueNombre_jetons(ouverturePackCommand.getPack().getPrix());
+        compteRepository.update(compte);
 
         for(int i = 0; i<ouverturePackCommand.getPack().getNbrCartes(); i++) {
 

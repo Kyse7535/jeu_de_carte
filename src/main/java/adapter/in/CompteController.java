@@ -18,32 +18,28 @@ public final class CompteController {
     private final CreationCompteUseCase creationCompteUseCase;
     private final RechercheJoueursUseCase rechercheJoueursUseCase;
     private final CreationHerosUseCase creationHerosUseCase;
-    private final RechercheHerosUseCase rechercheHerosUseCase;
-    /*
+    private final RechercheUnHerosUseCase rechercheUnHerosUseCase;
+    private final RechercheUnJoueurUseCase rechercheUnJoueurUseCase;
+    private final RechercheHerosDispoUseCase rechercheHerosDispoUseCase;
     private final CombatUseCase combatUseCase;
     private final OuverturePackUseCase ouverturePackUseCase;
     private final RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase;
-    private final RechercheUnJoueurUseCase rechercheUnJoueurUseCase;
-
-     */
 
 
-    public CompteController(CreationCompteUseCase creationCompteUseCase, RechercheJoueursUseCase rechercheJoueursUseCase/*, CombatUseCase combatUseCase*/,
-      CreationHerosUseCase creationHerosUseCase , RechercheHerosUseCase rechercheHerosUseCase/*,
-      OuverturePackUseCase ouverturePackUseCase, RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase,
-      RechercheUnJoueurUseCase rechercheUnJoueurUseCase*/) {
+
+    public CompteController(CreationCompteUseCase creationCompteUseCase, RechercheJoueursUseCase rechercheJoueursUseCase, CombatUseCase combatUseCase,
+                            CreationHerosUseCase creationHerosUseCase , RechercheUnHerosUseCase rechercheUnHerosUseCase,
+                            OuverturePackUseCase ouverturePackUseCase, RechercheHistoryHeroUseCase rechercheHistoryHeroUseCase,
+                            RechercheUnJoueurUseCase rechercheUnJoueurUseCase, RechercheHerosDispoUseCase rechercheHerosDispoUseCase) {
         this.creationCompteUseCase = creationCompteUseCase;
         this.rechercheJoueursUseCase = rechercheJoueursUseCase;
         this.creationHerosUseCase = creationHerosUseCase;
-        this.rechercheHerosUseCase = rechercheHerosUseCase;
-        /*
+        this.rechercheUnHerosUseCase = rechercheUnHerosUseCase;
+        this.rechercheUnJoueurUseCase = rechercheUnJoueurUseCase;
         this.combatUseCase = combatUseCase;
-
         this.ouverturePackUseCase = ouverturePackUseCase;
         this.rechercheHistoryHeroUseCase = rechercheHistoryHeroUseCase;
-        this.rechercheUnJoueurUseCase = rechercheUnJoueurUseCase;
-
-         */
+        this.rechercheHerosDispoUseCase = rechercheHerosDispoUseCase;
     }
 
     @PostMapping("/create_account")
@@ -61,7 +57,6 @@ public final class CompteController {
             listeComptesDTO.add(compteDTO);
         }
         return listeComptesDTO;
-        // curl -v localhost:8080/players
     }
 
     @PostMapping("/heros/create")
@@ -69,25 +64,39 @@ public final class CompteController {
         Caracteristiques caracteristiques = CaracteristiquesDtoMapper.toDomain(herosCreationDTO.caracteristiquesDto);
         Heros heros =  creationHerosUseCase.create(new CreationHerosCommand(caracteristiques));
         return HerosDtoMapper.toDto(heros);
-        //curl -X POST localhost:8080/heros/create -H 'Content-type:application/json' -d '{"specialite": "Tank", "rarete": "Commun"}'
+    }
+
+    @GetMapping("/comptes/{pseudo}")
+    public CompteDTO recherche_un_compte(@PathVariable String pseudo) {
+        Compte compte = rechercheUnJoueurUseCase.rechercheUnJoueur(new RechercheUnJoueurCommand(pseudo));
+        return CompteDtoMapper.toDto(compte);
     }
 
     @GetMapping("/heros/{id}")
     public HerosDTO recherche_un_heros(@PathVariable String id) {
-        Heros heros = rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(id));
+        Heros heros = rechercheUnHerosUseCase.rechercheHerosDispo(new RechercheUnHerosCommand(id));
         return HerosDtoMapper.toDto(heros);
     }
-    /*
+
+    @GetMapping("/heros")
+    public List<HerosDTO> recherche_heros_dispo() {
+        List<Heros> list = rechercheHerosDispoUseCase.rechercheListeHerosDispos();
+        List<HerosDTO> new_list = new ArrayList<>();
+        for(Heros heros : list) {
+            new_list.add(HerosDtoMapper.toDto(heros));
+        }
+        return new_list;
+    }
+
     @GetMapping("/{attaquant}/combat/{adversaire}")
     public HerosDTO combat(@PathVariable String attaquant, @PathVariable String adversaire){
         Combat combat = new Combat(
-                rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(attaquant)),
-                rechercheHerosUseCase.rechercheHerosDispo(new RechercheHerosCommand(adversaire))
+                rechercheUnHerosUseCase.rechercheHerosDispo(new RechercheUnHerosCommand(attaquant)),
+                rechercheUnHerosUseCase.rechercheHerosDispo(new RechercheUnHerosCommand(adversaire))
         );
 
         combatUseCase.attack(new CombatCommand(combat));
         return HerosDtoMapper.toDto(combat.getGagnant());
-        // curl -v localhost:8080/gesco/combat/gesco2
     }
 
     @GetMapping("/{pseudo}/open_pack/{pack}")
@@ -100,21 +109,17 @@ public final class CompteController {
             listeCartesDTO.add(HerosDtoMapper.toDto(i));
         }
         return listeCartesDTO;
-        // curl -v localhost:8080/gesco/open_pack/argent
 
     }
 
-
-    public ArrayList<CombatDTO> combat_history(String id) {
-        ArrayList<Combat> listeCombat = rechercheHistoryHeroUseCase.combatHistory(new RechercheHistoryHeroCommand(id));
+    @GetMapping("/{heros_id}/history")
+    public ArrayList<CombatDTO> combat_history(@PathVariable String heros_id) {
+        ArrayList<Combat> listeCombat = rechercheHistoryHeroUseCase.combatHistory(new RechercheHistoryHeroCommand(heros_id));
         ArrayList<CombatDTO> listeCombatDTO = new ArrayList<>();
         for(Combat i : listeCombat) {
             listeCombatDTO.add(CombatDtoMapper.toDto(i));
         }
         return listeCombatDTO;
     }
-
-     */
-
 
 }

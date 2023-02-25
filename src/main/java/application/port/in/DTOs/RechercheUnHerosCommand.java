@@ -1,10 +1,10 @@
 package application.port.in.DTOs;
 
-public class RechercheHerosCommand {
+public class RechercheUnHerosCommand {
     public final String id;
 
 
-    public RechercheHerosCommand(String id) {
+    public RechercheUnHerosCommand(String id) {
         this.id = id;
     }
 

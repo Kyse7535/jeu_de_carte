@@ -1,5 +1,6 @@
 package adapter.out.database.Adapter;
 
+import adapter.in.HerosDTO;
 import adapter.out.database.Entity.CompteEntity;
 import adapter.out.database.Entity.HerosEntity;
 import adapter.out.database.Mapper.CompteEntityMapper;
@@ -38,12 +39,13 @@ public class MysqlAdapter implements ComptePersistenceSpi, HerosPersistenceSpi {
     @Override
     @Transactional
     public Compte load_compte(String pseudo) {
-        return null;
+        return CompteEntityMapper.toDomain(compteRepository.findById(pseudo).get());
     }
 
     @Override
     public void update(Compte compte) {
-
+        CompteEntity entity = CompteEntityMapper.toEntity(compte);
+        compteRepository.save(entity);
     }
 
     @Override
@@ -71,11 +73,19 @@ public class MysqlAdapter implements ComptePersistenceSpi, HerosPersistenceSpi {
 
     @Override
     public void update(Heros heros) {
-
+        HerosEntity entity = HerosEntityMapper.toEntity(heros);
+        herosRepository.save(entity);
     }
 
     @Override
-    public ArrayList<Heros> findAllHeros() {
-        return null;
+    public List<Heros> findAllHeros() {
+        List<HerosEntity> list = herosRepository.findAll();
+        List<Heros> new_list = new ArrayList<>();
+        for(HerosEntity heros : list) {
+            if(heros.enVie) {
+                new_list.add(HerosEntityMapper.toDomain(heros));
+            }
+        }
+        return new_list;
     }
 }

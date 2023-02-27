@@ -1,10 +1,10 @@
-package domain.services;
+package application.services;
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.OuverturePackCommand;
-import application.services.OuverturePackService;
-import domain.Compte;
-import domain.Pack;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.OuverturePackCommand;
+import src.domain.functional.model.Compte;
+import src.domain.functional.model.Pack;
+import src.domain.functional.service.OuverturePackService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

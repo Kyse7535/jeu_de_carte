@@ -1,12 +1,12 @@
-package domain.services;
+package application.services;
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.CreationHerosCommand;
-import application.services.CreationHerosService;
-import domain.Caracteristiques;
-import domain.Heros;
-import domain.Rarete;
-import domain.Specialite;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.CreationHerosCommand;
+import src.domain.functional.model.Caracteristiques;
+import src.domain.functional.model.Heros;
+import src.domain.functional.model.Rarete;
+import src.domain.functional.model.Specialite;
+import src.domain.functional.service.CreationHerosService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

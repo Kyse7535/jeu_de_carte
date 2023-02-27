@@ -2,12 +2,13 @@ package domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import src.domain.functional.model.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HerosTest {
 
-    Heros attaquant = new Heros("123",new Caracteristiques(Specialite.Tank,Rarete.Commun));
+    Heros attaquant = new Heros("123",new Caracteristiques(Specialite.Tank, Rarete.Commun));
 
     @Test
     void gagnerUnCombat() {

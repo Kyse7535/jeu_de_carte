@@ -1,11 +1,11 @@
-package domain.services;
+package application.services;
 
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.CombatCommand;
-import application.services.CombatService;
-import domain.Combat;
-import domain.Heros;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.CombatCommand;
+import src.domain.functional.model.Combat;
+import src.domain.functional.model.Heros;
+import src.domain.functional.service.CombatService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,9 +1,9 @@
-package domain.services;
+package application.services;
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.RechercheHistoryHeroCommand;
-import application.services.RechercheHistoryHeroService;
-import domain.*;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.RechercheHistoryHeroCommand;
+import src.domain.functional.model.*;
+import src.domain.functional.service.RechercheHistoryHeroService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

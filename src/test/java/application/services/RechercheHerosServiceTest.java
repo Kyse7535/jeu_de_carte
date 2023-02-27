@@ -1,15 +1,15 @@
-package domain.services;
+package application.services;
 
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.CreationHerosCommand;
-import application.port.in.DTOs.RechercheUnHerosCommand;
-import application.services.CreationHerosService;
-import application.services.RechercheUnHerosService;
-import domain.Caracteristiques;
-import domain.Heros;
-import domain.Rarete;
-import domain.Specialite;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.CreationHerosCommand;
+import src.domain.functional.DTOs.RechercheUnHerosCommand;
+import src.domain.functional.model.Caracteristiques;
+import src.domain.functional.model.Heros;
+import src.domain.functional.model.Rarete;
+import src.domain.functional.model.Specialite;
+import src.domain.functional.service.CreationHerosService;
+import src.domain.functional.service.RechercheUnHerosService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

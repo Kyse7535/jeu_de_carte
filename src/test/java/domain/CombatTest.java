@@ -1,5 +1,7 @@
 package domain;
 
+import src.domain.functional.model.Combat;
+import src.domain.functional.model.Heros;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

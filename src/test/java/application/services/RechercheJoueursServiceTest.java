@@ -1,10 +1,10 @@
-package domain.services;
+package application.services;
 
-import adapter.out.database.Adapter.MysqlAdapter;
-import application.port.in.DTOs.CreationCompteCommand;
-import application.services.CreationCompteService;
-import application.services.RechercheJoueursService;
-import domain.Compte;
+import src.server.database.Adapter.MysqlAdapter;
+import src.domain.functional.DTOs.CreationCompteCommand;
+import src.domain.functional.model.Compte;
+import src.domain.functional.service.CreationCompteService;
+import src.domain.functional.service.RechercheJoueursService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
